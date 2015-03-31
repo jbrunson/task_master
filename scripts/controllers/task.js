@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('TaskCtrl', function($scope, FURL, $firebase, $location, $routeParams){
+app.controller('TaskCtrl', function($scope, FURL, $firebase, $location, $routeParams, toaster){
 
   var ref = new Firebase(FURL);
   var fbTasks = $firebase(ref.child('tasks')).$asArray();
@@ -22,6 +22,7 @@ app.controller('TaskCtrl', function($scope, FURL, $firebase, $location, $routePa
 
   $scope.updateTask = function(task) {
     $scope.selectedTask.$save(task);
+    toaster.pop('success', "Task is updated.");
     $location.path('/browse');
   }
 
@@ -29,6 +30,7 @@ app.controller('TaskCtrl', function($scope, FURL, $firebase, $location, $routePa
 
   $scope.postTask = function(task) {
     fbTasks.$add(task);
+    toaster.pop('success', "Task is created.");
     $location.path('/browse');
   }
 });
