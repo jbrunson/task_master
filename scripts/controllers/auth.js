@@ -2,6 +2,10 @@
 
 app.controller('AuthCtrl', function($scope, $location, Auth, toaster) {
 
+  if(Auth.signedIn()) {
+    $location.path('/');
+  }
+
   $scope.register = function(user) {
     Auth.register(user).then(function() {
       console.log("Registered successfully!");
