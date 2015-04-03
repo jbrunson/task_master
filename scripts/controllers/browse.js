@@ -81,6 +81,12 @@ app.controller("BrowseCtrl", function($scope, $routeParams, toaster, Task, Auth,
       $scope.alreadyOffered = false;
       $scope.block = false;
     });
+  };
+
+  $scope.acceptOffer = function(offerId, runnerId) {
+    Offer.acceptOffer($scope.selectedTask.$id, offerId, runnerId).then(function() {
+      toaster.pop('success', 'Offer is accepted.');
+    });
   }
 
 });
